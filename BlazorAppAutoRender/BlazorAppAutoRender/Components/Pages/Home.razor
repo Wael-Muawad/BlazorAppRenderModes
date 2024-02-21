@@ -1,0 +1,28 @@
+﻿@page "/"
+@using BlazorAppAutoRender.Client.Services
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<h2>Guids from data service</h2>
+<ul>
+    @foreach (var item in dummyData)
+    {
+        <li>@item</li>
+    }
+</ul>
+
+@code{
+    [Inject]
+    private ISomeRandomData _someRandomService { get; set; }
+    private string[] dummyData = [];
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        dummyData = await _someRandomService.GetDummyData();
+    }
+}
